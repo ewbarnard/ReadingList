@@ -6,9 +6,11 @@ use Cake\ORM\Entity;
 /**
  * AuthorsTitle Entity
  *
+ * @property int $id
  * @property int $author_id
  * @property int $title_id
  *
+ * @property \App\Model\Entity\Author $author
  * @property \App\Model\Entity\Title $title
  */
 class AuthorsTitle extends Entity
@@ -24,7 +26,9 @@ class AuthorsTitle extends Entity
      * @var array
      */
     protected $_accessible = [
+        'author_id' => true,
         'title_id' => true,
+        'author' => true,
         'title' => true
     ];
 }

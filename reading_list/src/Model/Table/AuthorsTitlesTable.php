@@ -9,6 +9,7 @@ use Cake\Validation\Validator;
 /**
  * AuthorsTitles Model
  *
+ * @property \App\Model\Table\AuthorsTable|\Cake\ORM\Association\BelongsTo $Authors
  * @property \App\Model\Table\TitlesTable|\Cake\ORM\Association\BelongsTo $Titles
  *
  * @method \App\Model\Entity\AuthorsTitle get($primaryKey, $options = [])
@@ -36,6 +37,10 @@ class AuthorsTitlesTable extends Table
         $this->setDisplayField('author_id');
         $this->setPrimaryKey(['author_id', 'title_id']);
 
+        $this->belongsTo('Authors', [
+            'foreignKey' => 'author_id',
+            'joinType' => 'INNER'
+        ]);
         $this->belongsTo('Titles', [
             'foreignKey' => 'title_id',
             'joinType' => 'INNER'
@@ -51,8 +56,7 @@ class AuthorsTitlesTable extends Table
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('author_id')
-            ->allowEmpty('author_id', 'create');
+            ->allowEmpty('id', 'create');
 
         return $validator;
     }
@@ -66,6 +70,7 @@ class AuthorsTitlesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
+        $rules->add($rules->existsIn(['author_id'], 'Authors'));
         $rules->add($rules->existsIn(['title_id'], 'Titles'));
 
         return $rules;

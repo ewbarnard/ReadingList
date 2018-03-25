@@ -9,15 +9,17 @@ CREATE TABLE `authors` (
   DEFAULT CHARSET = utf8;
 
 CREATE TABLE `authors_titles` (
-  `author_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `title_id`  INT(11) UNSIGNED NOT NULL,
-  PRIMARY KEY (`author_id`),
+  `id`        BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `author_id` INT(10) UNSIGNED    NOT NULL,
+  `title_id`  INT(11) UNSIGNED    NOT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `title_id` (`title_id`, `author_id`),
-  CONSTRAINT `authors_titles__author_id` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`),
+  UNIQUE KEY `author_id` (`author_id`, `title_id`),
   CONSTRAINT `authors_titles__title_id` FOREIGN KEY (`title_id`) REFERENCES `titles` (`id`)
 )
   ENGINE = InnoDB
-  DEFAULT CHARSET = utf8
+  DEFAULT CHARSET = utf8;
+
 CREATE TABLE `categories` (
   `id`       INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name`     VARCHAR(255)     NOT NULL DEFAULT '',
