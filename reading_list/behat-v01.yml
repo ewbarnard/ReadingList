@@ -1,0 +1,12 @@
+default:
+  extensions:
+    Behat\MinkExtension:
+      base_url: 'http://reading-list:8888/v01/'
+      sessions:
+        default:
+          goutte: ~
+
+  suites:
+    default:
+      contexts:
+        - ApiContext
