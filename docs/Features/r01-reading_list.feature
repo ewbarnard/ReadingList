@@ -1,4 +1,4 @@
-Feature: Reading List
+Feature: Reading List (r01)
 
   The reading list contains suggestions for further learning.
   Note: Subtitle and url are shortened for brevity.
